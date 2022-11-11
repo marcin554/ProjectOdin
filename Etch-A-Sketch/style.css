@@ -70,7 +70,9 @@
     }
 
 .change-color{
+    transition: all 0.2s ease;
     background-color: rgb(46, 46, 136);
+    
 }
 
 button{
