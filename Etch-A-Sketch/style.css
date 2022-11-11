@@ -11,15 +11,18 @@
     display: flex;
     justify-content: space-around;
     
+    
+    
 }
 #paintGrid{
-
+    border: 10px black solid;
     display: grid;
- 
+
     grid-template-columns: repeat(16, 0fr);
     grid-template-rows: repeat(auto-fill, 16);
     background-color: #2196F3;
     padding: 10px;
+    
     
 
     
@@ -30,12 +33,17 @@
 }
 
 .paintArea{
-   
-    width: 30px;
+    border: 0.05px solid black;
+    width: 7.5px;
+    height: 7.5px;
     background-color: rgba(255, 255, 255, 0.8);
 
     text-align: center;
 
+}
+
+.options{
+    
 }
 
 .header-container{
