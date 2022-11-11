@@ -28,14 +28,19 @@ function GetComputerChoice(){
 
 function returnResult(computerSelection, playerSelection, string, playerWins, computerWins){
     
+    if(playerWins == 5 || computerWins == 5){
+        EndGame();
+    }
+    else{
     content.innerHTML = "<br/>" + "Computer = " + computerSelection + " Player = " +  playerSelection + "<br/>" + string  +  "<br/>" + "<br/>" + "Player points: " + playerWins  + "<br/>" + "Computer points: " +computerWins + "<br/>";
 
     content.style.backgroundColor = 'lightblue';
     content.style.border = '2px dotted green';
     content.style.margin = '1%';
-    
+
 
     container.appendChild(content);
+}
 }
 
 function EndGame(){
