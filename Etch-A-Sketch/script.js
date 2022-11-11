@@ -10,12 +10,12 @@
             
             const content = document.createElement('div');
             content.classList.add('paintArea');
-            content.textContent = ".";
-            for (let y = 0; y < int; y++) {
+          
+            for (let y = 0; y < int - 1; y++) {
                
                 const content = document.createElement('div');
                 content.classList.add('paintArea');
-                content.textContent = ".";
+         
                 container.appendChild(content);
                
             }
@@ -59,6 +59,30 @@
         resetColor.forEach(element =>{
             element.classList.remove('change-color')
         })
+
+
+
+    });
+
+    const button2 = document.querySelector('#set-amount');
+
+    button2.addEventListener('click', () => {
+        console.log('eee');
+        let amount = prompt("Enter the amount. Max amount 100");
+        if (amount > 100){
+            amount = 100;
+        }
+
+        const squares = document.querySelectorAll('.paintArea');
+
+        squares.forEach(element =>{
+            element.remove();
+        })
+
+       AddSquares(amount);
+
+        
+    
 
 
 
