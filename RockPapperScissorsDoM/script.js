@@ -3,6 +3,13 @@ const rock = "ROCK";
 const papper = "PAPPER";
 const scissors = "SCISSORS";
 
+const container = document.querySelector('#container');
+const content = document.createElement('div');
+    content.classList.add('results');
+
+let playerWins;
+let computerWins;
+let GameStart = false;
 
 
 function GetComputerChoice(){
@@ -19,69 +26,119 @@ function GetComputerChoice(){
     }
 }
 
-function SingleRound(){
-    let playerSelectionPrompt = prompt("Please enter your pick rock/papper or scissors.");
-    let playerSelection = playerSelectionPrompt.toUpperCase();
-
-    const computerSelection = GetComputerChoice();
-    console.log("Computer= " + computerSelection + " Player= " +  playerSelection);
+function returnResult(computerSelection, playerSelection, string, playerWins, computerWins){
     
-    if( playerSelection  == computerSelection ){
-        return "None won.";
-    }
-    else if(playerSelection == rock && computerSelection == scissors){
-        return "Player won!";
-    }
-    else if(playerSelection == rock && computerSelection == papper){
-        return "Player lose!";
-    }
-    else if(playerSelection == scissors && computerSelection == papper){
-        return "Player won!";
-    }
-    else if(playerSelection == scissors && computerSelection == rock){
-        return "Player lose!";
-    }
-    else if(playerSelection == papper && computerSelection == rock){
-        return "Player won!";
-    }
-    else {
-        return "Player lose!";
-    }
+    content.innerHTML = "<br/>" + "Computer = " + computerSelection + " Player = " +  playerSelection + "<br/>" + string  +  "<br/>" + "<br/>" + "Player points: " + playerWins  + "<br/>" + "Computer points: " +computerWins + "<br/>";
 
+    content.style.backgroundColor = 'lightblue';
+    content.style.border = '2px dotted green';
+    content.style.margin = '1%';
+    
 
+    container.appendChild(content);
 }
 
-function FiveRounds(){
-     let playerWins = 0;
-     let computerWins = 0;
+function Game(playerSelectionPrompt){
+   
+    const playerSelection = playerSelectionPrompt.toUpperCase();
+    const computerSelection = GetComputerChoice();
 
-for (let i = 0; i < 5; i++) {
-    let a = SingleRound();
+    console.log("Computer= " + computerSelection + " Player= " +  playerSelection);
 
-    if(a == "Player won!"){
-        playerWins++;
+ 
+    if(GameStart == false){
+        NewGame();
     }
-    else if(a == "Player lose!"){
-        computerWins++;
+    else if(playerWins >= 5 || computerWins >= 5){
+
+      
+        
+
+        if(playerWins == 5){
+            content.innerHTML = "Player won!";
+        }
+        else{
+            content.innerHTML = "Computer won!";
+        }
+
+        container.appendChild(content);
+        
     }
     else{
-
-    }
+    switch (playerSelection) {
+        case 'ROCK':
+            if(computerSelection == papper){
+                computerWins++;
+                returnResult(computerSelection, playerSelection, "Computer won!", playerWins, computerWins);
+            }
+            else if(computerSelection == scissors){
+                 playerWins++;
+                 returnResult(computerSelection, playerSelection, "Player won!", playerWins, computerWins);
+            }
+            else{
+                returnResult(computerSelection, playerSelection, "None won!", playerWins, computerWins);
+            }
+            break;
     
-    console.log(playerWins, computerWins)
+        case 'PAPPER':
+            if(computerSelection == scissors){
+                computerWins++;
+                returnResult(computerSelection, playerSelection, "Computer won!", playerWins, computerWins);
+            }
+            else if(computerSelection == rock){
+                 playerWins++;
+                 returnResult(computerSelection, playerSelection, "Player won!", playerWins, computerWins);
+            }
+            else{
+                returnResult(computerSelection, playerSelection, "None won!", playerWins, computerWins);
+            }
+            break;
+        case 'SCISSORS':
+            if(computerSelection == rock){
+                computerWins++;
+                returnResult(computerSelection, playerSelection, "Computer won!", playerWins, computerWins);
+            }
+            else if(computerSelection == papper){
+                 playerWins++;
+                 returnResult(computerSelection, playerSelection, "Player won!", playerWins, computerWins);
+            }
+            else{
+              
+                returnResult(computerSelection, playerSelection, "None won!", playerWins, computerWins);
+            }
+            break;
+        default:
+            break;
+    }
+}
+   
 }
 
-if( playerWins > computerWins){
-    return "Player won.";
-}
-else if(computerWins > playerWins){
-    return "Computer won.";
-}
-else{
-    return "None won.";
-}
-
-
-
+function NewGame(){
   
+    GameStart = true;
+
+    playerWins = 0;
+    computerWins = 0;
+
+    console.log("Wwewew")
+
+
+
 }
+
+
+
+
+
+const buttons = document.querySelectorAll('.GameButtons');
+
+
+// we use the .forEach method to iterate through each button
+buttons.forEach((button) => {
+
+  // and for each one we add a 'click' listener
+  button.addEventListener('click', () => {
+    Game(button.id, playerWins, computerWins);
+  });
+});
