@@ -38,6 +38,30 @@ function returnResult(computerSelection, playerSelection, string, playerWins, co
     container.appendChild(content);
 }
 
+function EndGame(){
+    if(playerWins == 5){
+        content.innerHTML = "Player won!";
+    }
+    else{
+        content.innerHTML = "Computer won!";
+    }
+
+    if(element = document.getElementById('newGame') == null){
+        var btn = document.createElement('button');
+        btn.setAttribute("id", "newGame")
+        btn.textContent = "New Game";
+    }
+
+
+    btn.addEventListener("click", () => {
+        NewGame();
+
+
+    })
+
+    container.appendChild(content);
+    container.appendChild(btn);
+}
 function Game(playerSelectionPrompt){
    
     const playerSelection = playerSelectionPrompt.toUpperCase();
@@ -50,19 +74,7 @@ function Game(playerSelectionPrompt){
         NewGame();
     }
     else if(playerWins >= 5 || computerWins >= 5){
-
-      
-        
-
-        if(playerWins == 5){
-            content.innerHTML = "Player won!";
-        }
-        else{
-            content.innerHTML = "Computer won!";
-        }
-
-        container.appendChild(content);
-        
+         EndGame();
     }
     else{
     switch (playerSelection) {
@@ -116,10 +128,19 @@ function Game(playerSelectionPrompt){
 
 function NewGame(){
   
+    
+
     GameStart = true;
 
     playerWins = 0;
     computerWins = 0;
+
+    content.innerHTML = "<br/>" + "<br/>" + "Player points: " + playerWins  + "<br/>" + "Computer points: " +computerWins + "<br/>";
+
+    container.appendChild(content);
+    content.style.backgroundColor = 'lightblue';
+    content.style.border = '2px dotted green';
+    content.style.margin = '1%';
 
     console.log("Wwewew")
 
