@@ -1,0 +1,56 @@
+*{
+    margin: auto;
+    padding: 0px;
+
+}
+.container{
+    border: solid black 1px;
+   
+}
+
+.keys{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    
+}
+
+.buttonNumber{
+    width: 50px;
+    height: 50px;;
+    border: solid black 1px;
+    text-align: center;
+    
+}
+
+.display-area{
+    display: flex;
+    border: solid black 1px;
+    width: 750px;
+    height: 50px;
+}
+
+.buttonsKeys{
+    display: flex;
+    width: 750px;
+}
+
+.OperatorsKeys{
+    display: flex;
+    width: 750px;
+}
+
+.operators{
+
+    display: flex;  
+}
+
+.OperatorsKeys .operators button{
+    border: 1px black none;
+    border-radius: 10%;
+    padding: 10px;
+    background-color: #3882F6;;
+    color: #f9FAF8;
+
+    margin: 1%;
+    
+}
