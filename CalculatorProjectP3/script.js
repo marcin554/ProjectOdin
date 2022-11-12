@@ -1,7 +1,5 @@
 let displayValue = [];
 
-let numOne;
-let numTwo;
 
 let numbersButtons = document.querySelectorAll(".buttonNumber");
 
@@ -15,7 +13,7 @@ numbersButtons.forEach(button => {
         
         
         newValue();
-        console.table(displayValue.slice(-1))
+      
     });
 
     
@@ -28,6 +26,7 @@ function newValue(){
     display.textContent = displayValue;
 }
 
+
 let operatorButtons = document.querySelectorAll(".operator");
 
 operatorButtons.forEach(button  => {
@@ -35,7 +34,7 @@ operatorButtons.forEach(button  => {
     button.addEventListener('click', () => {
 
         
-       
+      
         switch (button.id) {
             case 'plus':{
 
@@ -72,20 +71,58 @@ operatorButtons.forEach(button  => {
             }
             case 'result': {
                
-                
+                GoOverString();
                 break;
             }
             default:
                 break;
         }
         newValue();
-    })
+    }
+    )
 
 });
 
 
 
+function GoOverString(){
 
+    let temporialNumber1 = "";
+    let whatToDo = '';
+    let temporialNumber2 = "";
+    let foundOperator = 0;
+
+    let lengthDisplayValue = displayValue.length;
+
+    
+    for (let i = 0; i < lengthDisplayValue; i++) {
+        if(displayValue.slice(+i) != (specialOperators))
+        if(!displayValue.slice(+i).includes(...specialOperators)){
+            temporialNumber1 = temporialNumber1 + displayValue.slice(+i +1);
+         
+        
+
+        }
+        else if(displayValue.slice(i).includes(...specialOperators)){
+            whatToDo = displayValue.slice(+i);
+            foundOperator++;
+            if(foundOperator == 2){
+                break;
+            }
+           
+        }
+        else if(!displayValue.slice(+i).includes(specialOperators)){
+            temporialNumber2 = temporialNumber2 + temporialNumber2;
+        }
+    }
+
+    console.log(temporialNumber1);
+    console.log(whatToDo);
+
+
+
+
+}
 
 
 
