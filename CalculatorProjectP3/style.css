@@ -25,9 +25,26 @@
 .display-area{
     display: flex;
     border: solid black 1px;
-    width: 750px;
+    width: 30vh;
     height: 50px;
 }
+.display{
+    flex-grow: 4;
+   
+    text-align: center;
+   
+}
+.operatorType{
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 4vh;
+    font-weight: bold;
+    padding: 2%;
+    border-left: solid black 1px;
+    text-align: center;
+}
+
 
 .buttonsKeys{
     display: flex;
@@ -39,6 +56,9 @@
     width: 750px;
 }
 
+.resultTable{
+    border: 5px solid black;
+}
 .operators{
 
     display: flex;  

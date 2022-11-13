@@ -9,6 +9,6 @@ https://marcin554.github.io/ProjectOdin/RockPapperScissorsDoM/
 
 https://marcin554.github.io/ProjectOdin/Etch-A-Sketch/
 
-#Calculator
+# Calculator
 
 https://marcin554.github.io/ProjectOdin/CalculatorProjectP3
