@@ -23,7 +23,10 @@ numbersButtons.forEach(button => {
 
     button.addEventListener('click', () => {
         
-        displayValue = displayValue + button.id;
+        if(displayValue.slice(-2, 1) != '.'){
+            displayValue = displayValue + button.id;
+        }
+        
         
         
         newValue();
