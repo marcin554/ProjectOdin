@@ -152,7 +152,7 @@ function switchs(string){
         }
         case 'result': {
          
-            if(displayValue != null && arrayOfCalculator != null && arrayOfCalculator.length >= 3){
+            if(displayValue != null && arrayOfCalculator != null && arrayOfCalculator.length >= 2){
                 arrayOfCalculator.push(displayValue);
                 displayValue = '';
     
