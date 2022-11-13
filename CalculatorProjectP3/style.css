@@ -1,83 +1,106 @@
 *{
-    margin: auto;
-    padding: 0px;
-
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
+}
+body{
+    background-color: antiquewhite;
 }
 .container{
-    border: solid black 1px;
-   
-}
+    
+    display: flex;
+    justify-content: center;
 
-.keys{
-    display: grid;
-    grid-template-columns: auto auto auto;
+    width: auto;
+}
+.container-1, .container-2 {
+background-color: rgb(238, 126, 74);
+border:rgb(68, 35, 35) 2px solid;
+border-radius: 1%;
+}
+.container-2{
     
 }
+.keys{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+ 
+}
 
-.buttonNumber{
-    width: 50px;
-    height: 50px;;
-    border: solid black 1px;
+button{
+background-color: rgb(233, 177, 124);
+border: solid 1px rgb(70, 47, 18);
+border-radius: 5%;
+}
+button:hover{
+    background-color: rgb(214, 149, 84);
+    transform: scale(1.02);
+    transition: all 0.7s;
+    
+}
+button:active{
+    background-color: rgb(136, 86, 36);
+    transform: scale(1.5);
+    transition: all 1.5s;
+}
+.buttonLook{
+    width: 10vh;
+    height: 10vh;
     text-align: center;
+    vertical-align: middle;
+    line-height: 10vh; 
+    font-size: 3vh;
+    font-weight: bolder;
+    color:rgb(68, 35, 35);
+    width: 100%;
+    height: 100%;
+
+}
+
+.operator button{
+    background-color: rgb(228, 115, 100);
     
 }
 
 .display-area{
     display: flex;
-    border: solid black 1px;
-    width: 30vh;
-    height: 50px;
+    border-top: solid rgb(70, 47, 18) 1px;
+    border-bottom: solid rgb(70, 47, 18) 1px;
+    background-color: rgb(233, 177, 124);;
+    border-radius: 4%;
+    text-align: center;
 }
+
 .display{
     flex-grow: 4;
-   
     text-align: center;
-   
+    height: 80px;
+    font-size: 3vh;
 }
+
 .operatorType{
-    
     flex-grow: 1;
-    display: flex;
-    justify-content: flex-end;
     font-size: 4vh;
-    font-weight: bold;
+    font-weight: bolder;
+    background-color: rgb(228, 183, 147);
+    border-left: solid rgb(70, 47, 18) 1px;
     padding: 2%;
-    border-left: solid black 1px;
-    text-align: center;
 }
 
 .currentResult{
-    display: flex;
-    justify-content: space-around;
+    flex-grow: 1;
     text-align: center;
-    width: 750px;
-
-}
-.buttonsKeys{
-    display: flex;
-    width: 750px;
-}
-
-.OperatorsKeys{
-    display: flex;
-    width: 750px;
+    font-size: 2vh;
+    width: 30vh;
+    height: 50px;
+    background-color: rgb(255, 241, 202);
 }
 
 .resultTable{
-    border: 5px solid black;
-}
-.operators{
-
-    display: flex;  
+    width: 40vh;
+    text-align: center;
+  
 }
 
-.OperatorsKeys .operators button{
-    border: 1px black none;
-    border-radius: 10%;
-    padding: 10px;
-    background-color: #3882F6;;
-    color: #f9FAF8;
-
-    margin: 1%;
-    
+.resultTable{
+    border-bottom: 2px dotted rgb(138, 54, 54);
 }
+

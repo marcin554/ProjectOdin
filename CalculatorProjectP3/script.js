@@ -1,44 +1,53 @@
 let displayValue = [];
+let history = [];
+let specialOperators = ["+", '-', '*', '/'];
 
-
-let history = [
-   
-];
-
-
-
-
+let number1;
+let number2;
+let resultOf;
+let picked;
 
 
 let numbersButtons = document.querySelectorAll(".buttonNumber");
-let picked;
-let specialOperators = ["+", '-', '*', '/'];
-
-let numer1;
-let numer2;
-let resultOf;
-
 
 numbersButtons.forEach(button => {
-
+    
     button.addEventListener('click', () => {
-        
         if(displayValue.slice(-2, 1) != '.'){
+           
             displayValue = displayValue + button.id;
         }
-        
-        
-        
-        newValue();
-      
-    });
+        updateDisplayValue();
+    })
 
-    
+   
+})
 
+let operatorButtons = document.querySelectorAll(".operator");
+
+operatorButtons.forEach(button  => {    
+    button.addEventListener('click', () => {
+
+        switchs(button.id);    
+    })
 });
 
+
+function updateDisplayValue(){
+    console.log("test")
+    let display = document.querySelector(".display");
+
+    let operatorDisplay = document.querySelector(".operatorType");
+
+        display.textContent = displayValue;
+        if(picked != null){
+            operatorDisplay.innerHTML = picked;
+        }
+
+  
+}
+
 function createHistory(num1, num2, operator, result){
-    
 
     let tempHistory = {
         numer1: num1,
@@ -54,25 +63,6 @@ function createHistory(num1, num2, operator, result){
     showHistory();
 }
 
-function newValue(){
-    
-    let display = document.querySelector(".display");
-
-    let operatorDisplay = document.querySelector(".operatorType");
-
-    
-        display.textContent = displayValue;
-        if(picked != null){
-            operatorDisplay.innerHTML = picked;
-        }
-        
-
-
-    
-   
-  
-}
-
 function showHistory(){
     let table = document.querySelector(".resultTable");
     
@@ -81,64 +71,34 @@ function showHistory(){
    
     alreadyCreated.forEach(element => {
         element.remove();
-    });
-
-
-    
+    })
 
     history.forEach(element => {
-        var y = document.createElement("TR");
+        var newTr = document.createElement("TR");
+        newTr.setAttribute('class', 'createdByScript');
 
         let a = document.createElement("TD");
         let b =document.createElement("TD");
         let c = document.createElement("TD");
         let d= document.createElement("TD");
 
-        y.setAttribute('class', 'createdByScript');
-       
         a.textContent=(element.numer1);
         b.textContent=(element.numer2);
         c.textContent=(element.operator);
         d.textContent=(element.result);
-     
 
-        y.appendChild(a);
-        y.appendChild(b);
-        y.appendChild(c);
-        y.appendChild(d);
-
-        // console.log(y);
-        // console.log(element.numer2);
-        table.appendChild(y);
+        newTr.appendChild(a);
+        newTr.appendChild(b);
+        newTr.appendChild(c);
+        newTr.appendChild(d);
 
 
+        table.appendChild(newTr);
     });
-
-       
-
-    
 }
-let operatorButtons = document.querySelectorAll(".operator");
-
-operatorButtons.forEach(button  => {
-    
-    button.addEventListener('click', () => {
-
-        switchs(button.id);
-      
-    })
-
-        
-       
-    
-
-});
 
 function AddAndSend(){
-    
-        
-  
-   
+
     if(resultOf != null){
         numer1 = parseFloat(resultOf);
         
@@ -152,8 +112,8 @@ function AddAndSend(){
 
 }
 
-
 function switchs(string){
+   
     switch (string) {
         case 'plus':{
 
@@ -206,8 +166,9 @@ function switchs(string){
         default:
             break;
     }
-    newValue();
-    
+
+    updateDisplayValue();
+
 }
 
 function Clear(){
@@ -227,57 +188,6 @@ function Clear(){
     });
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function add(num1, num2){
