@@ -1,11 +1,12 @@
 let displayValue = [];
 let history = [];
 let specialOperators = ["+", '-', '*', '/'];
-
-let number1;
-let number2;
-let resultOf;
+let haveRun = false;
+let resultOf = 0;
 let picked;
+let result;
+
+let arrayOfCalculator= [];
 
 
 let numbersButtons = document.querySelectorAll(".buttonNumber");
@@ -17,6 +18,7 @@ numbersButtons.forEach(button => {
            
             displayValue = displayValue + button.id;
         }
+       
         updateDisplayValue();
     })
 
@@ -34,7 +36,7 @@ operatorButtons.forEach(button  => {
 
 
 function updateDisplayValue(){
-    console.log("test")
+    
     let display = document.querySelector(".display");
 
     let operatorDisplay = document.querySelector(".operatorType");
@@ -83,8 +85,8 @@ function showHistory(){
         let d= document.createElement("TD");
 
         a.textContent=(element.numer1);
-        b.textContent=(element.numer2);
-        c.textContent=(element.operator);
+        b.textContent=(element.operator);
+        c.textContent=(element.numer2);     
         d.textContent=(element.result);
 
         newTr.appendChild(a);
@@ -97,18 +99,13 @@ function showHistory(){
     });
 }
 
-function AddAndSend(){
+function AddAndSend(operator){
 
-    if(resultOf != null){
-        numer1 = parseFloat(resultOf);
-        
-    }
-    else{
-        
-            numer1 = parseFloat(displayValue);
-            displayValue = '';
-        
-    }
+    arrayOfCalculator.push(displayValue);
+    
+    arrayOfCalculator.push(operator);
+    displayValue = '';
+
 
 }
 
@@ -117,8 +114,9 @@ function switchs(string){
     switch (string) {
         case 'plus':{
 
-            AddAndSend();
-           
+            AddAndSend('+');
+           resultOf = '';
+                
                 picked = '+';
                 
            
@@ -126,23 +124,23 @@ function switchs(string){
         }
         case 'minus': {
         
-            AddAndSend();
-     
+            AddAndSend('-');
+            resultOf = '';
                 picked = '-';
             
             
             break;
         }
         case 'multiply': {
-            AddAndSend();
-   
+            AddAndSend('*');
+            resultOf = '';
                 picked = '*';
           
             break;
         }
         case 'divide': {
-            AddAndSend();
-     
+            AddAndSend('/');
+            resultOf = '';
                 picked = '/';
             
             
@@ -153,13 +151,19 @@ function switchs(string){
             break;
         }
         case 'result': {
-            numer2 = parseFloat(displayValue);
-            if(numer1 && numer2 != null){
-              
+         
+            if(displayValue != null){
+                arrayOfCalculator.push(displayValue);
                 displayValue = '';
-                
-               Operate(picked, numer1, numer2)
+    
+           
+                doTheResult();
             }
+            
+
+
+             
+            
            
             break;
         }
@@ -171,12 +175,24 @@ function switchs(string){
 
 }
 
+function doTheResult(){
+    while(arrayOfCalculator != null && haveRun != true&&  arrayOfCalculator.length >= 2){
+                
+        resultOf = resultOf + Operate(arrayOfCalculator[0], arrayOfCalculator[1], arrayOfCalculator[2]);
+        haveRun = true;
+   
+    }
+
+            resultOf = result;
+}
+
 function Clear(){
     numer1 = '';
     numer2 = '';
     resultOf = null;
     displayValue = '';
     picked = '';
+    haveRun = false;
 
     history = [];
     
@@ -213,41 +229,76 @@ function divide(num1, num2){
     result = num1 / num2;
     return result;
 }
-function Operate(operator, num1, num2 ){
+function Operate( num1, operator, num2 ){
 
     switch (operator) {
         case '+':{
-            if(resultOf != null){
-                resultOf = null;
+            
+            arrayOfCalculator.splice(0, 1)
+            arrayOfCalculator.splice(0, 1)
+            arrayOfCalculator.splice(0, 1)
+            resultOf = add(parseFloat(num1), parseFloat(num2));
+            if( arrayOfCalculator.length >= 2){
+                arrayOfCalculator.unshift(resultOf);
             }
-            resultOf = add(num1, num2);
+            
+ 
             picked = '';
             createHistory(num1, num2, operator, result);
-            numer2 = '';
+            doTheResult()
+            return result;
             break;
         }
         case '-':{
-            resultOf =  subtract(num1, num2);
+            
+                arrayOfCalculator.splice(0, 1)
+                arrayOfCalculator.splice(0, 1)
+                arrayOfCalculator.splice(0, 1)
+                
+                
+                resultOf = subtract(parseFloat(num1), parseFloat(num2));
+                if( arrayOfCalculator.length >= 2){
+                    arrayOfCalculator.unshift(resultOf);
+                }
+       
             createHistory(num1, num2, operator, result);
-          
+            doTheResult()
             picked = '';
-            numer2 = '';
+            return result;
             break;
         }   
         case '*':{
-            resultOf =  multiply(num1, num2);
+            
+            arrayOfCalculator.splice(0, 1)
+            arrayOfCalculator.splice(0, 1)
+            arrayOfCalculator.splice(0, 1)
+            console.log(arrayOfCalculator);
+            console.log(num1);
+            console.log(num2);
+            resultOf = multiply(parseFloat(num1), parseFloat(num2));
+            if( arrayOfCalculator.length >= 2){
+                arrayOfCalculator.unshift(resultOf);
+            }
             createHistory(num1, num2, operator, result);
+            doTheResult()
       
             picked = '';
-            numer2 = '';
-            break;
+            return result;
+          
+           
         }
         case '/':{
-            resultOf =  divide(num1, num2);
+            arrayOfCalculator.splice(0, 1)
+            arrayOfCalculator.splice(0, 1)
+            arrayOfCalculator.splice(0, 1)
+            resultOf = divide(parseFloat(num1), parseFloat(num2));
+            if( arrayOfCalculator.length >= 2){
+                arrayOfCalculator.unshift(resultOf);
+            }
             createHistory(num1, num2, operator, result);
-            
+            doTheResult()
             picked = '';
-            numer2 = '';
+            return result;
             break;
         }
 
@@ -256,3 +307,4 @@ function Operate(operator, num1, num2 ){
             break;
     }
 }
+
