@@ -35,6 +35,7 @@
    
 }
 .operatorType{
+    
     flex-grow: 1;
     display: flex;
     justify-content: flex-end;
@@ -45,7 +46,13 @@
     text-align: center;
 }
 
+.currentResult{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    width: 750px;
 
+}
 .buttonsKeys{
     display: flex;
     width: 750px;

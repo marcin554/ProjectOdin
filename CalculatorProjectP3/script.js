@@ -44,6 +44,9 @@ function createHistory(num1, num2, operator, result){
         result: result
     }
 
+    let display = document.querySelector(".current");
+
+    display.innerHTML = resultOf;
     history.unshift(tempHistory);
     showHistory();
 }
@@ -134,11 +137,12 @@ function AddAndSend(){
   
    
     if(resultOf != null){
-        numer1 = parseInt(resultOf);
+        numer1 = parseFloat(resultOf);
+        
     }
     else{
         
-            numer1 = parseInt(displayValue);
+            numer1 = parseFloat(displayValue);
             displayValue = '';
         
     }
@@ -182,15 +186,18 @@ function switchs(string){
             break;
         }
         case 'clear':{
-            displayValue = '';
+            Clear();
             break;
         }
         case 'result': {
-            numer2 = parseInt(displayValue);
-            displayValue = '';
-            console.log(numer1);
-            console.log(numer2);
-           Operate(picked, numer1, numer2)
+            numer2 = parseFloat(displayValue);
+            if(numer1 && numer2 != null){
+              
+                displayValue = '';
+                
+               Operate(picked, numer1, numer2)
+            }
+           
             break;
         }
         default:
@@ -200,7 +207,23 @@ function switchs(string){
     
 }
 
+function Clear(){
+    numer1 = '';
+    numer2 = '';
+    resultOf = null;
+    displayValue = '';
+    picked = '';
 
+    history = [];
+    
+    let alreadyCreated = document.querySelectorAll('.createdByScript');
+
+   
+    alreadyCreated.forEach(element => {
+        element.remove();
+    });
+
+}
 
 
 
@@ -281,10 +304,13 @@ function Operate(operator, num1, num2 ){
 
     switch (operator) {
         case '+':{
+            if(resultOf != null){
+                resultOf = null;
+            }
             resultOf = add(num1, num2);
             picked = '';
             createHistory(num1, num2, operator, result);
-          
+            numer2 = '';
             break;
         }
         case '-':{
@@ -292,6 +318,7 @@ function Operate(operator, num1, num2 ){
             createHistory(num1, num2, operator, result);
           
             picked = '';
+            numer2 = '';
             break;
         }   
         case '*':{
@@ -299,6 +326,7 @@ function Operate(operator, num1, num2 ){
             createHistory(num1, num2, operator, result);
       
             picked = '';
+            numer2 = '';
             break;
         }
         case '/':{
@@ -306,6 +334,7 @@ function Operate(operator, num1, num2 ){
             createHistory(num1, num2, operator, result);
             
             picked = '';
+            numer2 = '';
             break;
         }
 
