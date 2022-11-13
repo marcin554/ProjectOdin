@@ -104,3 +104,6 @@ button:active{
     border-bottom: 2px dotted rgb(138, 54, 54);
 }
 
+.footer{
+    text-align: center;
+}
