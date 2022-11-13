@@ -193,6 +193,18 @@ function Clear(){
     displayValue = '';
     picked = '';
     haveRun = false;
+    result = '';
+
+
+
+
+
+
+
+
+
+let arrayOfCalculator= [];
+
 
     history = [];
     
