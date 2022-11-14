@@ -175,6 +175,30 @@ function switchs(string){
 
 }
 
+function Clear(){
+   
+   
+    resultOf = null;
+    displayValue = '';
+    picked = '';
+    haveRun = false;
+    let display = document.querySelector(".current");
+    display.innerHTML = '';
+
+
+    arrayOfCalculator= [];
+
+
+    
+    
+    let alreadyCreated = document.querySelectorAll('.createdByScript');
+
+   
+    alreadyCreated.forEach(element => {
+        element.remove();
+    });
+
+}
 function doTheMath(){
     let tempResult = 0;
 
