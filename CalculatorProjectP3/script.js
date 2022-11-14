@@ -56,9 +56,7 @@ function createHistory(num1, num2, operator, result){
         result: result
     }
 
-    let display = document.querySelector(".current");
-
-    display.innerHTML = resultOf;
+ 
     history.unshift(tempHistory);
     showHistory();
 }
@@ -205,7 +203,9 @@ function doTheMath(){
     }
    }
 
-    
+   let display = document.querySelector(".current");
+
+   display.innerHTML = tempResult;
     
     return tempResult;
 
