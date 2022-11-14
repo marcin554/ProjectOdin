@@ -97,10 +97,11 @@ function showHistory(){
 
 function AddAndSend(operator){
 
+    
     if(displayValue != ''){
         arrayOfCalculator.push(displayValue);
     }
-    
+   
     
     arrayOfCalculator.push(operator);
     displayValue = '';
@@ -112,38 +113,58 @@ function AddAndSend(operator){
 
 function switchs(string){
    
+   
+
+     
     switch (string) {
         case 'plus':{
-
-            AddAndSend('+');
+          
+          
+                
+                AddAndSend('+');
+                picked = '+';
+                console.log(picked);
+     
+            
+            
+           
            resultOf = '';
                 
-                picked = '+';
+               
                 
            
             break;
         }
         case 'minus': {
         
-            AddAndSend('-');
-            resultOf = '';
+       
+                AddAndSend('-');
                 picked = '-';
+          
+            resultOf = '';
+                
             
             
             break;
         }
         case 'multiply': {
-            AddAndSend('*');
-            resultOf = '';
+     
+                AddAndSend('*');
                 picked = '*';
+            
+            resultOf = '';
+                
           
             break;
         }
         case 'divide': {
-            AddAndSend('/');
-            resultOf = '';
+   
+                AddAndSend('/');
                 picked = '/';
             
+            
+            resultOf = '';
+                
             
             break;
         }
@@ -170,10 +191,11 @@ function switchs(string){
         default:
             break;
     }
+}
 
     updateDisplayValue();
 
-}
+
 
 function Clear(){
    
