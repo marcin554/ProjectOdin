@@ -1,20 +1,18 @@
 let displayValue = [];
 let history = [];
 let specialOperators = ["+", '-', '*', '/'];
-let haveRun = false;
-let resultOf = 0;
 let picked;
-let result;
-
-let arrayOfCalculator= [];
+let haveRun = false;
+let result2;
+let arrayOfCalculator = [];
 
 
 let numbersButtons = document.querySelectorAll(".buttonNumber");
-
 numbersButtons.forEach(button => {
     
+    
     button.addEventListener('click', () => {
-        if(displayValue.slice(-2, 1) != '.'){
+        if(displayValue.slice(-1, 1) != '.'){
            
             displayValue = displayValue + button.id;
         }
@@ -101,13 +99,18 @@ function showHistory(){
 
 function AddAndSend(operator){
 
-    arrayOfCalculator.push(displayValue);
+    if(displayValue != ''){
+        arrayOfCalculator.push(displayValue);
+    }
+    
     
     arrayOfCalculator.push(operator);
     displayValue = '';
 
 
 }
+
+
 
 function switchs(string){
    
@@ -151,20 +154,19 @@ function switchs(string){
             break;
         }
         case 'result': {
+            if(arrayOfCalculator.length >=2){
+            
+                if(displayValue != ''){
+                    arrayOfCalculator.push(displayValue);
+                }
+                
          
-            if(displayValue != null && arrayOfCalculator != null && arrayOfCalculator.length >= 2){
-                arrayOfCalculator.push(displayValue);
-                displayValue = '';
-    
-           
-                doTheResult();
+                result2 = doTheMath();
+              
+               
+               
             }
             
-
-
-             
-            
-           
             break;
         }
         default:
@@ -175,47 +177,51 @@ function switchs(string){
 
 }
 
-function doTheResult(){
-    while(arrayOfCalculator != null && haveRun != true&&  arrayOfCalculator.length >= 2){
-                
-        resultOf = resultOf + Operate(arrayOfCalculator[0], arrayOfCalculator[1], arrayOfCalculator[2]);
-        haveRun = true;
-   
+function doTheMath(){
+    let tempResult = 0;
+
+    let b = false;
+    let times = 0;
+   while(b == false){
+    console.log(arrayOfCalculator);
+
+    times++;
+    if(!times >= 1){
+        tempResult = tempResult + Operate(arrayOfCalculator[0], arrayOfCalculator[1], arrayOfCalculator[2]);
     }
-
-            resultOf = result;
-}
-
-function Clear(){
-    numer1 = '';
-    numer2 = '';
-    resultOf = null;
-    displayValue = '';
-    picked = '';
-    haveRun = false;
-    result = '';
-
-
-
-
-
-
-
-
-
-let arrayOfCalculator= [];
-
-
-    history = [];
+    else{
+        tempResult = Operate(arrayOfCalculator[0], arrayOfCalculator[1], arrayOfCalculator[2]);
+        times--;
+    }
     
-    let alreadyCreated = document.querySelectorAll('.createdByScript');
+    arrayOfCalculator.unshift(tempResult);
+    console.log(arrayOfCalculator);
+    if(arrayOfCalculator.length % 3 == 0 || arrayOfCalculator.length % 5 == 0 || arrayOfCalculator.length % 7 == 0){
+        b = false;
+    }
+    else{
 
-   
-    alreadyCreated.forEach(element => {
-        element.remove();
-    });
+        b =  true;
+    }
+   }
 
+    
+    
+    return tempResult;
+
+
+        
 }
+
+
+
+
+
+
+
+
+
+
 
 
 function add(num1, num2){
@@ -246,70 +252,47 @@ function Operate( num1, operator, num2 ){
     switch (operator) {
         case '+':{
             
-            arrayOfCalculator.splice(0, 1)
-            arrayOfCalculator.splice(0, 1)
-            arrayOfCalculator.splice(0, 1)
-            resultOf = add(parseFloat(num1), parseFloat(num2));
-            if( arrayOfCalculator.length >= 2){
-                arrayOfCalculator.unshift(resultOf);
-            }
-            
- 
-            picked = '';
+            DeleteUsed();
+            result = add(parseFloat(num1), parseFloat(num2));
             createHistory(num1, num2, operator, result);
-            doTheResult()
+            picked = '';
+            displayValue = '';
+           
             return result;
             break;
         }
         case '-':{
-            
-                arrayOfCalculator.splice(0, 1)
-                arrayOfCalculator.splice(0, 1)
-                arrayOfCalculator.splice(0, 1)
-                
-                
-                resultOf = subtract(parseFloat(num1), parseFloat(num2));
-                if( arrayOfCalculator.length >= 2){
-                    arrayOfCalculator.unshift(resultOf);
-                }
+        
+            DeleteUsed();
        
+            result = subtract(parseFloat(num1), parseFloat(num2));
+      
             createHistory(num1, num2, operator, result);
-            doTheResult()
             picked = '';
+            displayValue = '';
+           
             return result;
             break;
         }   
         case '*':{
-            
-            arrayOfCalculator.splice(0, 1)
-            arrayOfCalculator.splice(0, 1)
-            arrayOfCalculator.splice(0, 1)
-            console.log(arrayOfCalculator);
-            console.log(num1);
-            console.log(num2);
-            resultOf = multiply(parseFloat(num1), parseFloat(num2));
-            if( arrayOfCalculator.length >= 2){
-                arrayOfCalculator.unshift(resultOf);
-            }
+     
+            DeleteUsed();
+            result = multiply(parseFloat(num1), parseFloat(num2));
             createHistory(num1, num2, operator, result);
-            doTheResult()
-      
             picked = '';
+            displayValue = '';
+           
             return result;
           
            
         }
         case '/':{
-            arrayOfCalculator.splice(0, 1)
-            arrayOfCalculator.splice(0, 1)
-            arrayOfCalculator.splice(0, 1)
-            resultOf = divide(parseFloat(num1), parseFloat(num2));
-            if( arrayOfCalculator.length >= 2){
-                arrayOfCalculator.unshift(resultOf);
-            }
+            DeleteUsed();
+            result = divide(parseFloat(num1), parseFloat(num2));
             createHistory(num1, num2, operator, result);
-            doTheResult()
             picked = '';
+            displayValue = '';
+           
             return result;
             break;
         }
@@ -320,3 +303,10 @@ function Operate( num1, operator, num2 ){
     }
 }
 
+function DeleteUsed(){
+    for (let i = 0; i < 3; i++) {
+        arrayOfCalculator.splice(0, 1);
+        
+    }
+    
+}
