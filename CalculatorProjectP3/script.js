@@ -1,7 +1,7 @@
 let displayValue = [];
 let history = [];
 let specialOperators = ["+", '-', '*', '/'];
-let picked;
+let picked = '.';
 let haveRun = false;
 let result2;
 let arrayOfCalculator = [];
@@ -40,9 +40,9 @@ function updateDisplayValue(){
     let operatorDisplay = document.querySelector(".operatorType");
 
         display.textContent = displayValue;
-        if(picked != null){
+        
             operatorDisplay.innerHTML = picked;
-        }
+        
 
   
 }
@@ -129,7 +129,7 @@ function switchs(string){
             
            
            resultOf = '';
-                
+           updateDisplayValue();
                
                 
            
@@ -142,7 +142,7 @@ function switchs(string){
                 picked = '-';
           
             resultOf = '';
-                
+            updateDisplayValue();
             
             
             break;
@@ -151,7 +151,7 @@ function switchs(string){
      
                 AddAndSend('*');
                 picked = '*';
-            
+                updateDisplayValue();
             resultOf = '';
                 
           
@@ -161,7 +161,7 @@ function switchs(string){
    
                 AddAndSend('/');
                 picked = '/';
-            
+                updateDisplayValue();
             
             resultOf = '';
                 
@@ -207,7 +207,7 @@ function Clear(){
     let display = document.querySelector(".current");
     display.innerHTML = '';
 
-
+    history = [];
     arrayOfCalculator= [];
 
 
@@ -303,6 +303,7 @@ function Operate( num1, operator, num2 ){
             createHistory(num1, num2, operator, result);
             picked = '';
             displayValue = '';
+            updateDisplayValue();
            
             return result;
             break;
@@ -316,7 +317,7 @@ function Operate( num1, operator, num2 ){
             createHistory(num1, num2, operator, result);
             picked = '';
             displayValue = '';
-           
+            updateDisplayValue();
             return result;
             break;
         }   
@@ -327,7 +328,7 @@ function Operate( num1, operator, num2 ){
             createHistory(num1, num2, operator, result);
             picked = '';
             displayValue = '';
-           
+            updateDisplayValue();
             return result;
           
            
@@ -338,7 +339,7 @@ function Operate( num1, operator, num2 ){
             createHistory(num1, num2, operator, result);
             picked = '';
             displayValue = '';
-           
+            updateDisplayValue();
             return result;
             break;
         }
